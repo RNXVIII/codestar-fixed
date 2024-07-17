@@ -46,3 +46,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+
+
+class Booking(models.Model):
+    date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    booked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.date} - {'Booked' if self.booked else 'Available'} by {self.user.username if self.booked else 'N/A'}"

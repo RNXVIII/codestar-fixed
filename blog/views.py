@@ -22,3 +22,9 @@ def post_detail(request, slug):
     )
 
     
+def index(request):
+    bookings = Booking.objects.all().order_by('date')
+    context = {
+        'bookings': bookings,
+    }
+    return render(request, 'blog/index.html', context)
