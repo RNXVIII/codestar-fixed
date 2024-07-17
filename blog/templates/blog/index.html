@@ -2,53 +2,31 @@
 
 {% block content %}
 
-<!-- index.html content starts here -->
-<div class="container-fluid">
-    <div class="row">
-
-        <!-- Blog Entries Column -->
-        <div class="col-12 mt-3 left">
-            <div class="row">
-                {% for post in post_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ post.author }}</p>
-                                </div>
-                            </div>
-                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text">{{ post.excerpt }}</p>
-                            </a>
-
-                            <hr />
-                            <p class="card-text text-muted h6">{{ post.created_on}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
+<h1>Bookings</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.booked|yesno:"Booked,Available" }}</td>
+            <td>
+                {% if booking.booked %}
+                    {{ booking.user.username }}
+                {% else %}
+                    N/A
                 {% endif %}
-                {% endfor %}
-
-            </div>
-        </div>
-    </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
-</div>
-
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <!-- index.html content ends here -->
 {% endblock %}
 {% block copyright %}
