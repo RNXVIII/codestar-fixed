@@ -7,6 +7,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Booking(models.Model):
+    id = models.AutoField(primary_key=True)
     date = models.DateField()
     table_number = models.IntegerField(default=1)  # learned from CI
     user = models.ForeignKey(User, on_delete=models.CASCADE)

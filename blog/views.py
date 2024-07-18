@@ -14,7 +14,6 @@ def index(request):
             table_number = form.cleaned_data['table_number']
             user = request.user
 
-            # Check if there's already a booking for the same date and table number
             existing_booking = Booking.objects.filter(date=date, table_number=table_number).exists()
 
             if existing_booking:
@@ -37,6 +36,9 @@ def index(request):
         'form': form,
     }
     return render(request, 'blog/index.html', context)
+
+
+
 
 # Create your views here.
 # class PostList(generic.ListView):

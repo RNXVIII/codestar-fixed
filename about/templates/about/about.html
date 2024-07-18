@@ -7,18 +7,17 @@
       <img src="{% static 'images/nobody.jpg' %}" width="75%" />
     </div>
     <div class="col-8">
-      <!-- Title goes between these h2 tags -->
-      <h2>{{ about.title }}</h2>
-      <!-- Content goes directly underneath this -->
-      {{ about.content | safe }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col text-right">
-      <!-- Updated on field goes in here -->
+     <h1>About Page</h1>
 
-      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
-    </div>
-  </div>
-</div>
+    <h2>Your Bookings</h2>
+
+    {% if user_bookings %}
+        <ul>
+            {% for booking in user_bookings %}
+                <li>{{ booking.date }} - Table {{ booking.table_number }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bookings found.</p>
+    {% endif %}
 {% endblock content %}
