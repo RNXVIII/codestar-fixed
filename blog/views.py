@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from .models import Post
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import BookingForm
+from .models import Booking
+
 
 @login_required
 def index(request):
@@ -10,8 +13,12 @@ def index(request):
         if form.is_valid():
             booking = form.save(commit=False)
             booking.user = request.user
+            booking.booked = True  # Ensure the booking is marked as booked
             booking.save()
-            return redirect('index')
+            messages.success(request, 'Booking successfully created.')
+            return redirect('home')
+        else:
+            messages.error(request, 'There was an error with your booking.')
     else:
         form = BookingForm()
 
@@ -22,25 +29,23 @@ def index(request):
     }
     return render(request, 'blog/index.html', context)
 
-
-
 # Create your views here.
-class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1)
-    template_name = "blog/index.html"
-    paginate_by = 6
+# class PostList(generic.ListView):
+#     queryset = Post.objects.filter(status=1)
+#     template_name = "blog/index.html"
+#     paginate_by = 6
 
 
-def post_detail(request, slug):
+# def post_detail(request, slug):
 
-    queryset = Post.objects.filter(status=1)
-    post = get_object_or_404(queryset, slug=slug)
+#     queryset = Post.objects.filter(status=1)
+#     post = get_object_or_404(queryset, slug=slug)
 
-    return render(
-        request,
-        "blog/post_detail.html",
-        {"post": post,
-         "coder": "Matt Rudge"},
-    )
+#     return render(
+#         request,
+#         "blog/post_detail.html",
+#         {"post": post,
+#          "coder": "Matt Rudge"},
+#     )
 
     

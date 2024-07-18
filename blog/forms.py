@@ -4,7 +4,7 @@ from .models import Booking
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['date', 'booked']
+        fields = ['date']  
 
     def clean_date(self):
         date = self.cleaned_data.get('date')
