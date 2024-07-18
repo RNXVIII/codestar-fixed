@@ -164,6 +164,6 @@ i want to have atleast 2 fully running apps done in the time of the resubmission
 
 i appologise for what seems to be a lackluster project , theres things in this project that show potential but it also lacks content and a more authentic theme , i wanted to show that i had actually learned and taken something away from this before the deadline. 
 
-im confident i can make a fully functioning app in django that can cover all criteria and will proceed to learn this framework! 
+after further revision and research im confident i can make a fully functioning app in django that can cover all criteria and will proceed to learn this framework! 
 
 that is all!!!
