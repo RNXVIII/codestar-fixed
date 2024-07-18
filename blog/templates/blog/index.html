@@ -2,11 +2,16 @@
 
 {% block content %}
 
-<h1>Bookings</h1>
-    <table>
-        <thead>
+
+
+
+<div class="content container">
+    <h1>Bookings</h1>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
             <tr>
                 <th>Date</th>
+                <th>Table Number</th>
                 <th>Status</th>
                 <th>User</th>
             </tr>
@@ -15,6 +20,7 @@
             {% for booking in bookings %}
             <tr>
                 <td>{{ booking.date }}</td>
+                <td>{{ booking.table_number }}</td>
                 <td>{{ booking.booked|yesno:"Booked,Available" }}</td>
                 <td>
                     {% if booking.booked %}
@@ -28,23 +34,39 @@
         </tbody>
     </table>
 
-    <h2>Make a Booking</h2>
+    <h2 class="mt-4">Make a Booking</h2>
     {% if user.is_authenticated %}
         {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
-        <form method="post">
+        <form method="post" class="mb-4">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Book</button>
+            <div class="form-group">
+                <label for="id_date">Date:</label>
+                <input type="date" id="id_date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="id_table_number">Table Number:</label>
+                <input type="text" id="id_table_number" name="table_number" class="form-control" placeholder="Enter table number" required>
+            </div>
+            <div class="form-group">
+                <label for="id_user">User (if applicable):</label>
+                <input type="text" id="id_user" name="user" class="form-control" placeholder="Enter username if booking for someone else">
+            </div>
+            <button type="submit" class="btn btn-primary">Book</button>
         </form>
     {% else %}
-        <p>You need to <a href="{% url 'account_login' %}">login</a> to make a booking.</p>
+        <div class="alert alert-warning">
+            You need to <a href="{% url 'account_login' %}">login</a> to make a booking.
+        </div>
     {% endif %}
+</div>
 <!-- index.html content ends here -->
 {% endblock %}
 {% block copyright %}

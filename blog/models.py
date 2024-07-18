@@ -8,12 +8,15 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 class Booking(models.Model):
     date = models.DateField()
+    table_number = models.IntegerField(default=1)  # learned from CI
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     booked = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.date} - {'Booked' if self.booked else 'Available'} by {self.user.username if self.booked else 'N/A'}"
+    class Meta:
+        unique_together = ('date', 'table_number')
 
+    def __str__(self):
+        return f"{self.date} - Table {self.table_number} - {'Booked' if self.booked else 'Available'} by {self.user.username if self.booked else 'N/A'}"
 
 
 # class Post(models.Model):
