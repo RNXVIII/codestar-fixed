@@ -51,6 +51,8 @@ align the nav bar for a more neat looking webpage
 
 style the footer/header to be more unique 
 
+another page to view menu items
+
 # Languages used 
 
 [Python](https://www.python.org/)
@@ -115,6 +117,13 @@ Code Institues walkthrough project Django
 [W3Schools](https://www.w3schools.com/django/index.php)
 
 if it werent for these two things im unsure on how would of been able to learn django a bit easier
+
+examples of when w3schools helped me
+
+index.html
+forms.py
+models.py
+views.py (pretty sure this code is straight from w3schools)
 
 # Libaries and tools used
 
